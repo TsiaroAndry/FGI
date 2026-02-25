@@ -1,38 +1,22 @@
-#!/data/data/com.termux/files/usr/bin/python
-# FGI - Wrapper pour module compilé
-# Reproduit le comportement de if __name__ == "__main__"
+#!/data/data/com.termux/files/usr/bin/bash
+# Wrapper pour FGI.so
+cd /storage/emulated/0/Download/cythonize
+echo "========================================="
+echo "🚀 FGI - Module compilé"
+echo "========================================="
+echo "📊 1223 lignes de code"
+echo ""
 
-import os
-import sys
-from pathlib import Path
+if [ "$1" = "list" ]; then
+    echo "📋 Fonctions disponibles:"
+    python -c "import FGI; print([f for f in dir(FGI) if not f.startswith('_')])"
+elif [ -n "$1" ]; then
+    echo "🚀 Appel de $1()"
+    python -c "import FGI; getattr(FGI, '$1')()"
+else
+    echo "🚀 Exécution par défaut"
+    python -c "import FGI"
+fi
 
-# Se placer dans le bon répertoire
-os.chdir(Path(__file__).parent)
-
-try:
-    # Importer le module compilé
-    import FGI
-    
-    # Vérifier la fonction approval() comme dans le script original
-    if hasattr(FGI, 'approval') and FGI.approval():
-        print("✅ Approval OK, lancement du menu...")
-        print("-" * 40)
-        
-        # Exécuter menu() comme dans le script original
-        if hasattr(FGI, 'menu'):
-            try:
-                FGI.menu()
-            except Exception as e:
-                if "ConnectionError" in str(e) or "connection" in str(e).lower():
-                    print('\n No internet connection ...')
-                else:
-                    print(f'\n Erreur: {e}')
-        else:
-            print("❌ Fonction menu() non trouvée!")
-    else:
-        print("❌ Approval échoué ou fonction non trouvée")
-        
-except ImportError as e:
-    print(f"❌ Erreur d'import: {e}")
-    print("Assurez-vous que FGI.so est dans le même répertoire")
-    sys.exit(1)
+echo ""
+echo "========================================="
