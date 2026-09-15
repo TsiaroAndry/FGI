@@ -1,7 +1,6 @@
 ```bash
 #!/data/data/com.termux/files/usr/bin/bash
 
-# Se placer dans le dossier où se trouve ce script
 cd "$(dirname "$0")" || exit 1
 
 echo "========================================="
