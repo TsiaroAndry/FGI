@@ -3,10 +3,6 @@ cd "$(dirname "$0")" || exit 1
 
 python3 -c "
 import FGI
-if hasattr(FGI, 'menu'):
+if FGI.approval():
     FGI.menu()
-elif hasattr(FGI, 'loop'):
-    FGI.loop()
-else:
-    print('Fonctions disponibles :', [f for f in dir(FGI) if not f.startswith('_')])
 "
