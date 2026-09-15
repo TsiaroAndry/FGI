@@ -1,6 +1,9 @@
+```bash
 #!/data/data/com.termux/files/usr/bin/bash
-# Wrapper pour FGI.so
-cd /storage/emulated/0/Download/cythonize
+
+# Se placer dans le dossier où se trouve ce script
+cd "$(dirname "$0")" || exit 1
+
 echo "========================================="
 echo "🚀 FGI - Module compilé"
 echo "========================================="
@@ -20,3 +23,4 @@ fi
 
 echo ""
 echo "========================================="
+```
