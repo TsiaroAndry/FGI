@@ -1,25 +1,12 @@
-```bash
 #!/data/data/com.termux/files/usr/bin/bash
-
 cd "$(dirname "$0")" || exit 1
 
-echo "========================================="
-echo "🚀 FGI - Module compilé"
-echo "========================================="
-echo "📊 1223 lignes de code"
-echo ""
-
-if [ "$1" = "list" ]; then
-    echo "📋 Fonctions disponibles:"
-    python -c "import FGI; print([f for f in dir(FGI) if not f.startswith('_')])"
-elif [ -n "$1" ]; then
-    echo "🚀 Appel de $1()"
-    python -c "import FGI; getattr(FGI, '$1')()"
-else
-    echo "🚀 Exécution par défaut"
-    python -c "import FGI"
-fi
-
-echo ""
-echo "========================================="
-```
+python3 -c "
+import FGI
+if hasattr(FGI, 'menu'):
+    FGI.menu()
+elif hasattr(FGI, 'loop'):
+    FGI.loop()
+else:
+    print('Fonctions disponibles :', [f for f in dir(FGI) if not f.startswith('_')])
+"
